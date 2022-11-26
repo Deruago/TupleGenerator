@@ -1,3 +1,6 @@
+#ifndef DEAMER_META_FUNCTION_TUPLE_GENERATOR_H
+#define DEAMER_META_FUNCTION_TUPLE_GENERATOR_H
+
 #include <type_traits>
 #include <variant>
 #include <tuple>
@@ -92,3 +95,5 @@ struct TupleGenerator
     template<int... counts>
     using type = decltype(InternalRepeat<TypeCache<>, 0, counts...>());
 };
+
+#endif // DEAMER_META_FUNCTION_TUPLE_GENERATOR_H
