@@ -34,10 +34,10 @@ struct TupleGenerator
     {
         using rhs = GetIndexType<index - 1, Rest..., std::monostate>;
 
-        // If index < 0; Then LHS
+        // If index <= 0; Then LHS
         // If rest size == 0 Then LHS
         // Else RHS
-        using type = typename If<(index < 0) || sizeof...(Rest) == 0, 1, Type, rhs>::type;
+        using type = typename If<(index <= 0) || sizeof...(Rest) == 0, 1, Type, rhs>::type;
     };
 
     template<int index>
@@ -49,7 +49,7 @@ struct TupleGenerator
     template<int index>
     struct GetIndex
     {
-        using type = typename GetIndexType<index - 1, CoreType...>::type;
+        using type = typename GetIndexType<index, CoreType...>::type;
     };
 
     template<typename... StoredTs>
