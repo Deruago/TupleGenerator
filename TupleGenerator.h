@@ -67,7 +67,7 @@ struct TupleGenerator
     template<typename newT, typename originalTypeCache>
     using ConstructTypeCache = decltype(
         ConstructTypeCache_<newT>(
-                typename originalTypeCache::type{}
+                std::declval<typename originalTypeCache::type>()
             )
         );
 
@@ -87,7 +87,6 @@ struct TupleGenerator
         }
         else
         {
-            // return InternalRepeat<TypeCache<typename GetIndex<index>::type>, index, count - 1, counts...>();
             return InternalRepeat<ConstructTypeCache<typename GetIndex<index>::type, typeCache>, index, count - 1, counts...>();
         }
     }
